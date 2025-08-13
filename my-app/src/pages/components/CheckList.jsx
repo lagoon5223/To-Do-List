@@ -27,7 +27,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
         }
     };
     const today = dayjs().format("YYYY-MM-DD");
-    console.log(today)
+    // console.log(today)
     // const handleComplete = (nowDate) => {
     //     if (nowDate) {
     //         isCompleted(nowDate);
@@ -47,7 +47,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
                 <Item
                     key={index}
                     $completed={item.completedInfo}
-                    $isOverview={item.endDate && new Date(item.endDate) < new Date(today)}
+                    $isOverview={item.endDate && !item.completeInfo && new Date(item.endDate) < new Date(today)}
                 >
                     <SliceSwitch
                         isOn={item.completeInfo}
