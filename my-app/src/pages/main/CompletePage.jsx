@@ -20,7 +20,7 @@ const CompletePage = () => {
             {completedList.map((item, index) => (
                 <Item key={index}>
                     <Task>{item.toDo}</Task>
-                    {item.endDate && <Date>{`${item.nowDate.match(/^\d{4}-\d{2}-\d{2}/)[0]} ~ ${item.endDate}`}</Date>}
+                    {item.endDate && <Date>{item.startDate ? `${item.nowDate.match(/^\d{4}-\d{2}-\d{2}/)[0]} ~ ${item.endDate}` : `${item.endDate}`} </Date>}
                     {item.detailInfo && <Detail>{item.detailInfo}</Detail>}
                 </Item>
             ))}
