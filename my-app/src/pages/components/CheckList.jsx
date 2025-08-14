@@ -26,6 +26,43 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
             isCompleted(nowDate);
         }
     };
+    const checkDay = ({ startDate, endDate, completeInfo }) => {
+        let colors;
+        switch (true) {
+            //완료된 일
+            case completeInfo:
+                colors = "completed"
+                console.log("completed")
+                break;
+            //진행중인 일
+            case !startDate && endDate === today:
+                colors = "progress";
+                console.log("completed2")
+                break;
+            case startDate && endDate &&
+                (dayjs(today).isAfter(startDate) || dayjs(startDate).isSame(today)) &&
+                (dayjs(today).isBefore(endDate) || dayjs(endDate).isSame(today) ):
+                colors = "progress";
+                console.log("completed5")
+                break;
+            //아직 진행되지 않은 일
+            case dayjs(endDate).isAfter(today):
+                colors = "atmosphere";
+                console.log("completed3")
+                break;
+            //지난 일
+            case !startDate && dayjs(endDate).isBefore(today):
+                colors = "fail";
+                console.log("completed4")
+                break;
+
+            case startDate && dayjs(endDate).isBefore(today):
+                colors = "fail";
+                console.log("completed6")
+                break;
+        }
+        return colors;
+    }
     const today = dayjs().format("YYYY-MM-DD");
     // console.log(today)
     // const handleComplete = (nowDate) => {
@@ -47,7 +84,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
                 <Item
                     key={index}
                     $completed={item.completedInfo}
-                    $isOverview={item.endDate && !item.completeInfo && new Date(item.endDate) < new Date(today)}
+                    $status={checkDay(item)}
                 >
                     <SliceSwitch
                         isOn={item.completeInfo}
@@ -94,8 +131,12 @@ const Item = styled.div`
     text-align: center;
     align-items: center;
     justify-content: center;
-    background-color:${props => props.$isOverview ? "#FFCCCC" : "#DCDCDC"} ;
-    user-select: none;
+    background-color: ${({ $status }) =>
+        $status === "completed" ? "#90EE90" :
+            $status === "fail" ? "#FFCCCC" :
+                $status === "progress" ? "#ADD8E6" :
+                    "#DCDCDC"
+    };    user-select: none;
 `;
 
 const Font = styled.div`
