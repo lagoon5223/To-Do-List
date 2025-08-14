@@ -4,6 +4,7 @@ import AddTodoButton from "../../components/button/AddTodoButton";
 import { useEffect, useState } from "react";
 import AddListModal from "../../components/modal/AddListModal";
 import { useNavigate } from 'react-router-dom';
+import Circle from "../../components/Circle";
 
 const MainPage = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -115,10 +116,21 @@ const MainPage = () => {
             <Container2>
                 <TitleFont>To-Do-List</TitleFont>
             </Container2>
-            <ButtonContainer>
-                <AddTodoButton onClick={handleOpenModal} text={"할 일 추가하기"} />
-                <AddTodoButton onClick={handleCompletedPage} text={"완료된 일 보기"} />
-            </ButtonContainer>
+
+            <Container3>
+                <StatusContainer>
+                    <Circle status="completed" text="완료" />
+                    <Circle status="fail" text="마감일 지남" />
+                    <Circle status="progress" text="진행 중" />
+                    <Circle text="진행 전" />
+                </StatusContainer>
+
+                <ButtonContainer>
+                    <AddTodoButton onClick={handleOpenModal} text={"할 일 추가하기"} />
+                    <AddTodoButton onClick={handleCompletedPage} text={"완료된 일 보기"} />
+                </ButtonContainer>
+            </Container3>
+
             <CheckList
                 toDoList={toDoList}
                 reFresh={handleReFresh}
@@ -147,12 +159,22 @@ const Container2 = styled.div`
     height: 100%;
     justify-content: center;
 `
+const Container3 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+`
 const ButtonContainer = styled.div`
     display: flex;
     width: 12%;
     justify-content: flex-end;
     flex-direction: column;
     margin-left: auto;
+`
+const StatusContainer = styled.div`
+    display: flex;
+    gap: 20px;
 `
 const TitleFont = styled.div`
     display: flex;
