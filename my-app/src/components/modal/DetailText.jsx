@@ -19,9 +19,12 @@ const DetailText = ({ open, detailData, onClose }) => {
         onClose();
     };
     useEffect(() => {
-        if(open,detailData?.endDate){
+        if (open, detailData?.endDate, detailData?.startDate) {
+            setEndDate(`${detailData.startDate} ~ ${detailData.endDate}`)
+        }
+        else if (open, detailData?.endDate) {
             setEndDate(`~${detailData.endDate}`);
-        }else{
+        } else {
             setEndDate("")
         }
         if (open, detailData?.detailInfo) {
