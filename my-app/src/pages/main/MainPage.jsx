@@ -100,6 +100,8 @@ const MainPage = () => {
 
     /**
      * 할 일 목록들
+     * 
+     * 리뷰 : 변수 명을 하나로 지정.
      */
     const handleValue = ({ toDo, detailInfo, endDate, startDate, nowDate, completeInfo }) => {
         setToDoList(prev => [...prev, { toDo, detailInfo, endDate, startDate, nowDate, completeInfo }]);
