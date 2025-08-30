@@ -1,6 +1,6 @@
 import styled from "styled-components"
-
 const Circle = ({ status, text }) => {
+    if (typeof (status) !== Boolean || typeof (text) !== String) return;
     return (
         <CircleWrapper>
             <CircleCss $status={status} />

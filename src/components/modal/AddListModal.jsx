@@ -3,7 +3,15 @@ import Modal from "./Modal";
 import styled from "styled-components";
 import Button from "../button/Button";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
+import {CheckAddListTypes} from "../../types/types"
 
+
+/**
+ * 
+ * @param {*} param0 
+ * @returns toDo, detailInfo, endDate, startDate, nowDate, completeInfo
+ */
 const AddListModal = ({ open, onClose, toDoValue }) => {
   /**
    * 할 일(타이틀, 제목, 마감일, 시작일)
@@ -112,6 +120,8 @@ const AddListModal = ({ open, onClose, toDoValue }) => {
     </Modal>
   );
 };
+
+AddListModal.propTypes = CheckAddListTypes;
 
 
 const Container = styled.div`

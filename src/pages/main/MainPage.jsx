@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import CheckList from "../components/CheckList";
-import AddTodoButton from "../../components/button/AddTodoButton";
+import Button from "../../components/button/Button";
 import { useEffect, useState } from "react";
 import AddListModal from "../../components/modal/AddListModal";
 import { useNavigate } from 'react-router-dom';
 import Circle from "../../components/Circle";
-
 const MainPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [toDoList, setToDoList] = useState([]);
@@ -14,12 +13,15 @@ const MainPage = () => {
 
     const navigate = useNavigate();
 
+    //할 일 추가 모달 열기
     const handleOpenModal = () => {
         setIsOpen(true);
     }
+    //할 일 추가 모달 닫기
     const handleCloseModal = () => {
         setIsOpen(false);
     }
+    //캐시 가져오기
     const handleGetCache = () => {
         const cache = localStorage.getItem("todoCache");
         return cache;
@@ -82,7 +84,9 @@ const MainPage = () => {
         }
         setReFresh(false);
     }, [reFresh]);
-
+    /**
+     * 날짜와 완료 여부를 확인하고 정렬하는 로직
+     */
     useEffect(() => {
         const cache = handleGetCache();
         if (cache) {
@@ -100,11 +104,11 @@ const MainPage = () => {
 
     /**
      * 할 일 목록들
-     * 
+     * toDo, detailInfo, endDate, startDate, nowDate, completeInfo
      * 리뷰 : 변수 명을 하나로 지정.
      */
-    const handleValue = ({ toDo, detailInfo, endDate, startDate, nowDate, completeInfo }) => {
-        setToDoList(prev => [...prev, { toDo, detailInfo, endDate, startDate, nowDate, completeInfo }]);
+    const handleValue = (item) => {
+        setToDoList(prev => [...prev, item]);
         setCacheCheck(true);
     };
     /**
@@ -128,8 +132,8 @@ const MainPage = () => {
                 </StatusContainer>
 
                 <ButtonContainer>
-                    <AddTodoButton onClick={handleOpenModal} text={"할 일 추가하기"} />
-                    <AddTodoButton onClick={handleCompletedPage} text={"완료된 일 보기"} />
+                    <Button onClick={handleOpenModal} text={"할 일 추가하기"} backgroundColor='#4CAF50' color='balck' />
+                    <Button onClick={handleCompletedPage} text={"완료된 일 보기"} backgroundColor='#4CAF50' color='balck' />
                 </ButtonContainer>
             </Container3>
 
@@ -147,6 +151,8 @@ const MainPage = () => {
         </Container>
     );
 }
+
+
 
 const Container = styled.div`
     display: flex;
@@ -169,10 +175,12 @@ const Container3 = styled.div`
 `
 const ButtonContainer = styled.div`
     display: flex;
-    width: 12%;
+    width: 50%;
+    height: auto;
+    align-items: flex-end;
     justify-content: flex-end;
     flex-direction: column;
-    margin-left: auto;
+    gap: 10px;
 `
 const StatusContainer = styled.div`
     display: flex;

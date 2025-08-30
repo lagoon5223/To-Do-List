@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
+import { CheckAddListTypes } from "../../types/types";
 const CompletePage = () => {
     const [completedList, setCompletedList] = useState([]);
 
@@ -27,6 +28,8 @@ const CompletePage = () => {
         </Container>
     );
 };
+
+CompletePage.propTypes = CheckAddListTypes;
 
 const Container = styled.div`
     display: flex;

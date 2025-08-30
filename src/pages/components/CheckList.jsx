@@ -3,7 +3,8 @@ import { useState } from "react";
 import DetailText from "../../components/modal/DetailText";
 import SliceSwitch from "../../components/button/SliceSwitch";
 import dayjs from "dayjs";
-
+import PropTypes from "prop-types";
+import { CheckAddListTypes } from "../../types/types";
 const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectItem, setSelectItem] = useState(null);
@@ -19,6 +20,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const detailData = (item) => {
         setSelectItem(item);
     }
+    
     const handleToggle = (nowDate, currentValue) => {
         if (currentValue) {
             isFail(nowDate);
@@ -41,7 +43,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
                 break;
             case startDate && endDate &&
                 (dayjs(today).isAfter(startDate) || dayjs(startDate).isSame(today)) &&
-                (dayjs(today).isBefore(endDate) || dayjs(endDate).isSame(today) ):
+                (dayjs(today).isBefore(endDate) || dayjs(endDate).isSame(today)):
                 colors = "progress";
                 console.log("completed5")
                 break;
@@ -64,18 +66,6 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
         return colors;
     }
     const today = dayjs().format("YYYY-MM-DD");
-    // console.log(today)
-    // const handleComplete = (nowDate) => {
-    //     if (nowDate) {
-    //         isCompleted(nowDate);
-    //     }
-    // }
-    // const handleFail = (nowDate) => {
-    //     if (nowDate) {
-    //         isFail(nowDate);
-    //     }
-    // }
-
 
     return (
         <Container>
@@ -107,6 +97,9 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
         </Container>
     );
 };
+
+CheckList.propTypes = CheckAddListTypes;
+
 
 
 const Container = styled.div`

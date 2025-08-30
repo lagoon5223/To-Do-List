@@ -2,13 +2,20 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 import Button from "../button/Button";
-
+import PropTypes from "prop-types";
+import { CheckDetailTextTypes } from "../../types/types";
+/**
+ * 상세정보 표시 모달
+ */
 const DetailText = ({ open, detailData, onClose }) => {
     const [selectText, setSelectText] = useState("");
     const [endDate, setEndDate] = useState("");
     const handleText = () => {
         setSelectText("");
     }
+    /**
+     * 캐시에 있는 정보 찾기
+     */
     const handleCancel = () => {
         const cache = localStorage.getItem("todoCache");
         if (cache) {
@@ -18,8 +25,11 @@ const DetailText = ({ open, detailData, onClose }) => {
         }
         onClose();
     };
+    /**
+     * 상세 정보와 날짜를 확인 후 표기
+     */
     useEffect(() => {
-        if (open, detailData?.endDate, detailData?.startDate) {
+        if (open, detailData?.endDate && detailData?.startDate) {
             setEndDate(`${detailData.startDate} ~ ${detailData.endDate}`)
         }
         else if (open, detailData?.endDate) {
@@ -53,6 +63,9 @@ const DetailText = ({ open, detailData, onClose }) => {
         </Modal>
     )
 }
+
+DetailText.propTypes = CheckDetailTextTypes;
+
 const Container = styled.div`
     display: flex;
     flex-direction:column;

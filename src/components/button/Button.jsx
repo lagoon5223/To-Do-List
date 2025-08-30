@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+
+/**
+ * 버튼 컴포넌트
+ */
+
 const ButtonContainer = styled.div`
   display: flex;
   width: 18%;
@@ -22,6 +27,7 @@ const ButtonText = styled.span`
   color: ${({ $color }) => $color}; /* 텍스트 색상 */
   letter-spacing: 0.5px;
 `;
+
 const Button = (props) => {
   const {
     text,

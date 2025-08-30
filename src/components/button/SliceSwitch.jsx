@@ -1,23 +1,9 @@
 import styled from "styled-components";
 import checkIcon from "../../assets/checkIcon.svg"
-
+/**
+ * 완료를 유무를 표시하는 슬라이드 스위치
+ */
 const SliceSwitch = ({ isOn, onToggle }) => {
-  // const [isOn, setIsOn] = useState(defaultOn);
-
-  // useEffect(() => {
-  //   setIsOn(defaultOn);
-  // }, [defaultOn]);
-
-  // const toggle = () => {
-  //   setIsOn(prev => {
-  //     const newValue = !prev;
-  //     if (newValue) isCompleted();
-  //     else isFail();
-  //     return newValue;
-  //   });
-  // };
-
-
   return (
     <SwitchContainer onClick={onToggle} $isOn={isOn}>
       <Circle $isOn={isOn}>{isOn && <Icon src={checkIcon} />}</Circle>
