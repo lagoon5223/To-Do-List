@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 import Button from "../button/Button";
-import PropTypes from "prop-types";
-import { CheckDetailTextTypes } from "../../types/types";
 /**
  * 상세정보 표시 모달
  */
@@ -64,7 +62,6 @@ const DetailText = ({ open, detailData, onClose }) => {
     )
 }
 
-DetailText.propTypes = CheckDetailTextTypes;
 
 const Container = styled.div`
     display: flex;

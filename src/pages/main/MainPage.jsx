@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import AddListModal from "../../components/modal/AddListModal";
 import { useNavigate } from 'react-router-dom';
 import Circle from "../../components/Circle";
+
 const MainPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [toDoList, setToDoList] = useState([]);

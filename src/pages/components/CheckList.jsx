@@ -4,7 +4,10 @@ import DetailText from "../../components/modal/DetailText";
 import SliceSwitch from "../../components/button/SliceSwitch";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { CheckAddListTypes } from "../../types/types";
+
+/**
+ * 체크리스트 재정렬 컴포넌트
+ */
 const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectItem, setSelectItem] = useState(null);
@@ -12,7 +15,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const handleOpenModal = (item) => {
         setIsOpen(true);
         detailData(item);
-    }
+    }   
     const handleCloseModal = () => {
         setIsOpen(false);
         setSelectItem(null);
@@ -20,7 +23,7 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const detailData = (item) => {
         setSelectItem(item);
     }
-    
+
     const handleToggle = (nowDate, currentValue) => {
         if (currentValue) {
             isFail(nowDate);
@@ -34,33 +37,27 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
             //완료된 일
             case completeInfo:
                 colors = "completed"
-                console.log("completed")
                 break;
             //진행중인 일
             case !startDate && endDate === today:
                 colors = "progress";
-                console.log("completed2")
                 break;
             case startDate && endDate &&
                 (dayjs(today).isAfter(startDate) || dayjs(startDate).isSame(today)) &&
                 (dayjs(today).isBefore(endDate) || dayjs(endDate).isSame(today)):
                 colors = "progress";
-                console.log("completed5")
                 break;
             //아직 진행되지 않은 일
             case dayjs(endDate).isAfter(today):
                 colors = "atmosphere";
-                console.log("completed3")
                 break;
             //지난 일
             case !startDate && dayjs(endDate).isBefore(today):
                 colors = "fail";
-                console.log("completed4")
                 break;
 
             case startDate && dayjs(endDate).isBefore(today):
                 colors = "fail";
-                console.log("completed6")
                 break;
         }
         return colors;
@@ -97,9 +94,6 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
         </Container>
     );
 };
-
-CheckList.propTypes = CheckAddListTypes;
-
 
 
 const Container = styled.div`

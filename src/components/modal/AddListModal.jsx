@@ -3,13 +3,8 @@ import Modal from "./Modal";
 import styled from "styled-components";
 import Button from "../button/Button";
 import dayjs from "dayjs";
-import PropTypes from "prop-types";
-import {CheckAddListTypes} from "../../types/types"
-
-
 /**
  * 
- * @param {*} param0 
  * @returns toDo, detailInfo, endDate, startDate, nowDate, completeInfo
  */
 const AddListModal = ({ open, onClose, toDoValue }) => {
@@ -121,7 +116,6 @@ const AddListModal = ({ open, onClose, toDoValue }) => {
   );
 };
 
-AddListModal.propTypes = CheckAddListTypes;
 
 
 const Container = styled.div`

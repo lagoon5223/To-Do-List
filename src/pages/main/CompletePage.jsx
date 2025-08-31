@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { CheckAddListTypes } from "../../types/types";
+
+/**
+ * 완료된 일 모아놓은 페이지
+ */
 const CompletePage = () => {
     const [completedList, setCompletedList] = useState([]);
-
+    /**
+     * 저장된 데이터 중 completedInfo가 true인 데이터 표기
+     */
     useEffect(() => {
         const cache = localStorage.getItem("todoCache");
         if (cache) {
@@ -28,8 +32,6 @@ const CompletePage = () => {
         </Container>
     );
 };
-
-CompletePage.propTypes = CheckAddListTypes;
 
 const Container = styled.div`
     display: flex;
