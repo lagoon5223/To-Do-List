@@ -33,32 +33,28 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
      * 타입 체크
      */
     useEffect(() => {
-        if (!Array.isArray(toDoList)) {
-            console.error("toDoList가 배열이 아님!");
-            return;
-        }
+    // 배열 여부 먼저 체크
+    if (!Array.isArray(toDoList)) {
+      console.error("toDoList가 배열이 아닙니다!");
+      return;
+    }
 
-        toDoList.forEach((item, index) => {
-            if (typeof item.completeInfo !== "boolean") {
-                console.warn(`toDoList[${index}].completeInfo 타입이 올바르지 않음:`, item.completeInfo);
-            }
-            if (typeof item.detailInfo !== "string") {
-                console.warn(`toDoList[${index}].detailInfo 타입이 올바르지 않음:`, item.detailInfo);
-            }
-            if (typeof item.endDate !== "string") {
-                console.warn(`toDoList[${index}].endDate 타입이 올바르지 않음:`, item.endDate);
-            }
-            if (typeof item.nowDate !== "string") {
-                console.warn(`toDoList[${index}].nowDate 타입이 올바르지 않음:`, item.nowDate);
-            }
-            if (typeof item.startDate !== "string") {
-                console.warn(`toDoList[${index}].startDate 타입이 올바르지 않음:`, item.startDate);
-            }
-            if (typeof item.toDo !== "string") {
-                console.warn(`toDoList[${index}].toDo 타입이 올바르지 않음:`, item.toDo);
-            }
-        });
-    }, [toDoList]);
+    // 하나라도 타입 에러가 있으면 true
+    const hasTypeError = toDoList.some(item => 
+      typeof item.completeInfo !== "boolean" ||
+      typeof item.detailInfo !== "string" ||
+      typeof item.endDate !== "string" ||
+      typeof item.nowDate !== "string" ||
+      typeof item.startDate !== "string" ||
+      typeof item.toDo !== "string"
+    );
+
+    if (hasTypeError) {
+      console.error("올바르지 않은 타입 CheckList");
+    }
+
+  }, [toDoList]);
+
     const checkDay = ({ startDate, endDate, completeInfo }) => {
         let colors;
         switch (true) {
