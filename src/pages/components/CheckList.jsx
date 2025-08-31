@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import DetailText from "../../components/modal/DetailText";
 import SliceSwitch from "../../components/button/SliceSwitch";
 import dayjs from "dayjs";
-import PropTypes from "prop-types";
 
 /**
  * 체크리스트 재정렬 컴포넌트
@@ -11,11 +10,10 @@ import PropTypes from "prop-types";
 const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectItem, setSelectItem] = useState(null);
-
     const handleOpenModal = (item) => {
         setIsOpen(true);
         detailData(item);
-    }   
+    }
     const handleCloseModal = () => {
         setIsOpen(false);
         setSelectItem(null);
@@ -31,6 +29,36 @@ const CheckList = ({ toDoList, reFresh, isCompleted, isFail }) => {
             isCompleted(nowDate);
         }
     };
+    /**
+     * 타입 체크
+     */
+    useEffect(() => {
+        if (!Array.isArray(toDoList)) {
+            console.error("toDoList가 배열이 아님!");
+            return;
+        }
+
+        toDoList.forEach((item, index) => {
+            if (typeof item.completeInfo !== "boolean") {
+                console.warn(`toDoList[${index}].completeInfo 타입이 올바르지 않음:`, item.completeInfo);
+            }
+            if (typeof item.detailInfo !== "string") {
+                console.warn(`toDoList[${index}].detailInfo 타입이 올바르지 않음:`, item.detailInfo);
+            }
+            if (typeof item.endDate !== "string") {
+                console.warn(`toDoList[${index}].endDate 타입이 올바르지 않음:`, item.endDate);
+            }
+            if (typeof item.nowDate !== "string") {
+                console.warn(`toDoList[${index}].nowDate 타입이 올바르지 않음:`, item.nowDate);
+            }
+            if (typeof item.startDate !== "string") {
+                console.warn(`toDoList[${index}].startDate 타입이 올바르지 않음:`, item.startDate);
+            }
+            if (typeof item.toDo !== "string") {
+                console.warn(`toDoList[${index}].toDo 타입이 올바르지 않음:`, item.toDo);
+            }
+        });
+    }, [toDoList]);
     const checkDay = ({ startDate, endDate, completeInfo }) => {
         let colors;
         switch (true) {
